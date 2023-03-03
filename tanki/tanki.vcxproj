@@ -131,13 +131,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="loadIMG.cpp" />
     <ClCompile Include="movement.cpp" />
+    <ClCompile Include="shoot.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="tanki.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes.h" />
+    <ClInclude Include="loadIMG.h" />
     <ClInclude Include="movement.h" />
+    <ClInclude Include="shoot.h" />
     <ClInclude Include="Tank.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

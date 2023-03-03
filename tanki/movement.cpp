@@ -2,26 +2,34 @@
 #include"movement.h"
 
 
-void moveUp(Sprite tank, float elapsed)
+void moveUp(Sprite& tank, float& speedTank)
 {
 	tank.setRotation(0);
-	tank.move(0, -300 * elapsed / 1000);
+	if (tank.getPosition().y - 180 > 0) {
+		tank.move(0, -speedTank);
+	}
 }
 
-void moveDown(Sprite tank, float elapsed)
+void moveDown(Sprite& tank, float& speedTank, int screenHeight)
 {
 	tank.setRotation(180);
-	tank.move(0, 300 * elapsed / 1000);
+	if (tank.getPosition().y + 260 < screenHeight) {
+		tank.move(0, speedTank);
+	}
 }
 
-void moveRight(Sprite tank, float elapsed)
+void moveRight(Sprite& tank, float& speedTank ,int screenWidth)
 {
 	tank.setRotation(90);
-	tank.move(300 * elapsed / 1000, 0);
+	if (tank.getPosition().x + 186 < screenWidth) {
+		tank.move(speedTank, 0);
+	}
 }
 
-void moveLeft(Sprite tank, float elapsed)
+void moveLeft(Sprite& tank, float& speedTank)
 {
 	tank.setRotation(270);
-	tank.move(-300 * elapsed / 1000, 0);
+	if (tank.getPosition().x - 178 > 0) {
+		tank.move(-speedTank, 0);
+	}
 }

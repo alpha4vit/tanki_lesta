@@ -2,7 +2,6 @@
 
 void shoot(Sprite& bullet,const float& speedBullet, bool&isShoot)
 {   
-    
     switch ((int)bullet.getRotation())
     {
     case 0: {bullet.move(0, -speedBullet); break; }

@@ -1,11 +1,11 @@
 ﻿#pragma once
 
-#include <iostream>
 #include<SFML/Graphics.hpp>
-#include"Tank.h"
 #include"movement.h"
 #include"loadIMG.h"
 #include"shoot.h"
+#include"Bullet.h"
+#include"Tank.h"
 using namespace std;
 using namespace sf;
 int main()
@@ -19,40 +19,17 @@ int main()
     int screenHeight = VideoMode::getDesktopMode().height;
     RenderWindow game(VideoMode(screenWidth, screenHeight), "Tanki");
     game.setFramerateLimit(144);
-    
 
-    //load images and create objects
+   
+    // creating objects
 
-    Image imageTank;
-    if (!imageTank.loadFromFile("image/tank.png")) {
-        cout << "Не удалось загрузить текстуру танка, проверьте ее наличие по заданному пути в проекте: image/tank.png";
-        exit(-1);
-    }
-    Texture textureTank;
-    textureTank.loadFromImage(imageTank);
-    Sprite tank;
-    tank.setTexture(textureTank);
-    tank.setTextureRect(IntRect(129, 121, 146, 276));
-    Clock clk;
-    tank.setPosition(Vector2f(screenWidth / 2, screenHeight - 280));
-    tank.setOrigin(Vector2f(70, 180));
+    Tank tank = *new Tank();
+    Bullet bullet = *new Bullet();
 
-
-    Image imgBullet;
-    if (!imgBullet.loadFromFile("image/bullet.png")) {
-        cout << "Не удалось загрузить текстуру снаряда, проверьте ее наличие по заданному пути в проекте: bullet/tank.png";
-        exit(-1);
-    }
-    Texture bulletTexture;
-    bulletTexture.loadFromImage(imgBullet);
-    Sprite bullet;
-    bullet.setTexture(bulletTexture);
-    bullet.setPosition(-50, -50);
-    
 
 
     bool isShoot = false;
-
+    Clock clk;
     while (game.isOpen()) {
         Event ev; 
         while (game.pollEvent(ev)) {
@@ -67,35 +44,32 @@ int main()
 
 
         game.clear();
-        game.draw(bullet);
-        game.draw(tank);
+        game.draw(bullet.sprite);
+        game.draw(tank.sprite);
         if (Keyboard::isKeyPressed(Keyboard::W)) {
-            moveUp(tank, speedTank);
+            moveUp(tank.sprite, speedTank);
         }
         else if (Keyboard::isKeyPressed(Keyboard::S)) {
-            moveDown(tank, speedTank, screenHeight);
+            moveDown(tank.sprite, speedTank, screenHeight);
         }
         else if (Keyboard::isKeyPressed(Keyboard::D)) {
-            moveRight(tank, speedTank, screenWidth);
+            moveRight(tank.sprite, speedTank, screenWidth);
         }
         else if (Keyboard::isKeyPressed(Keyboard::A)) {
-            moveLeft(tank, speedTank);
+            moveLeft(tank.sprite, speedTank);
         }
         if (Keyboard::isKeyPressed(Keyboard::Space) && !isShoot) {
-            bullet.setPosition(tank.getPosition().x , tank.getPosition().y);
-            bullet.setRotation(tank.getRotation());
+            bullet.sprite.setPosition(tank.sprite.getPosition().x , tank.sprite.getPosition().y);
+            bullet.sprite.setRotation(tank.sprite.getRotation());
             isShoot = true;
         }
         if (isShoot) {
-            shoot(bullet, speedBullet, isShoot);
+            shoot(bullet.sprite, speedBullet, isShoot);
         }
 
 
         game.display();
     }
-
-    
-
 
     return 0;
 }

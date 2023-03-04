@@ -8,6 +8,7 @@ class Tank
 private:
 	Image img;
 	Texture texture;
+
 public:
 	Sprite sprite;
 	Tank();

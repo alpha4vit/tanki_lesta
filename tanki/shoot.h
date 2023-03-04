@@ -3,6 +3,7 @@
 #include<SFML/Graphics.hpp>
 #include"movement.h"
 #include"loadIMG.h"
+#include"Bullet.h"
 using namespace std;
 using namespace sf;
-void shoot(Sprite& bullet,const float& speedBullet, bool& isShoot);
+void shoot(Bullet& bullet,const float& speedBullet);

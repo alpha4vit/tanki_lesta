@@ -10,5 +10,6 @@ Bullet::Bullet()
 	this->texture.loadFromImage(this->img);
 	this->sprite = Sprite();
 	this->sprite.setTexture(this->texture);
-
+	this->isShoot = true;
 }
+

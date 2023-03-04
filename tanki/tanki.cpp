@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include<SFML/Graphics.hpp>
+#include<vector>
 #include"movement.h"
 #include"loadIMG.h"
 #include"shoot.h"
@@ -24,9 +25,7 @@ int main()
     // creating objects
 
     Tank tank = *new Tank();
-    Bullet bullet = *new Bullet();
-
-
+    vector<Bullet> bullets;
 
     bool isShoot = false;
     Clock clk;
@@ -44,8 +43,13 @@ int main()
 
 
         game.clear();
-        game.draw(bullet.sprite);
         game.draw(tank.sprite);
+        for (int i = 0; i < size(bullets); ++i) {
+            if (bullets[i].getState() == false) {
+                bullets.erase(bullets.begin() + i);
+            }
+            game.draw(bullets[i].sprite);
+        }
         if (Keyboard::isKeyPressed(Keyboard::W)) {
             moveUp(tank.sprite, speedTank);
         }
@@ -59,12 +63,18 @@ int main()
             moveLeft(tank.sprite, speedTank);
         }
         if (Keyboard::isKeyPressed(Keyboard::Space) && !isShoot) {
-            bullet.sprite.setPosition(tank.sprite.getPosition().x , tank.sprite.getPosition().y);
+            Bullet bullet = *new Bullet();
+            bullet.sprite.setPosition(tank.sprite.getPosition().x, tank.sprite.getPosition().y);
             bullet.sprite.setRotation(tank.sprite.getRotation());
-            isShoot = true;
+            bullets.push_back(bullet);
         }
-        if (isShoot) {
-            shoot(bullet.sprite, speedBullet, isShoot);
+        for (int i = 0; i < bullets.size(); ++i) {
+            if (bullets[i].getState()) {
+                shoot(bullets[i], speedBullet);
+            }
+            else {
+                bullets.erase(bullets.begin() + i);
+            }
         }
 
 

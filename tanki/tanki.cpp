@@ -54,7 +54,7 @@ int main()
     bool isShoot = false;
 
     while (game.isOpen()) {
-        Event ev;
+        Event ev; 
         while (game.pollEvent(ev)) {
             if (ev.type == Event::Closed) {
                 game.close();

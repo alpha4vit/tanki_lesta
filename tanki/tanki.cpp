@@ -63,7 +63,7 @@ int main()
 
         float elapsed = clk.restart().asMilliseconds();
         float speedTank = 300 * elapsed / 1000;
-        float speedBullet = 600 * elapsed / 1000;
+        float speedBullet = 1000 * elapsed / 1000;
 
 
         game.clear();
@@ -87,7 +87,7 @@ int main()
             isShoot = true;
         }
         if (isShoot) {
-            shoot(tank, bullet, speedBullet, isShoot);
+            shoot(bullet, speedBullet, isShoot);
         }
 
 

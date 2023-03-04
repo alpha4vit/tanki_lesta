@@ -1,22 +1,14 @@
 #include "shoot.h"
 
-void shoot(const Sprite& tank, Sprite& bullet, float& speedBullet, bool&isShoot)
+void shoot(Sprite& bullet,const float& speedBullet, bool&isShoot)
 {   
-    int direction = 0;
-    int min = 361;
-    for (int i = 0; i < 361; i += 90) {
-        if (abs((int)bullet.getRotation() - i) < min) {
-            direction = i;
-            min = (int)bullet.getRotation() - i;
-        }
-    }
-
-    switch (direction)
+    
+    switch ((int)bullet.getRotation())
     {
-    case 0: bullet.move(0, -speedBullet);
-    case 90: bullet.move(speedBullet, 0);
-    case 180: bullet.move(0, speedBullet);
-    case 270: bullet.move(-speedBullet, 0);
+    case 0: {bullet.move(0, -speedBullet); break; }
+    case 90: {bullet.move(speedBullet, 0); break; }
+    case 180: {bullet.move(0, speedBullet); break; }
+    case 270: {bullet.move(-speedBullet, 0); break; }
     default:
         break;
     }

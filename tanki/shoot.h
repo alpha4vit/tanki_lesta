@@ -6,4 +6,4 @@
 #include"loadIMG.h"
 using namespace std;
 using namespace sf;
-void shoot(const Sprite& tank, Sprite& bullet, float& speedBullet, bool& isShoot);
+void shoot(Sprite& bullet,const float& speedBullet, bool& isShoot);

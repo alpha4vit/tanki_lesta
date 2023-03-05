@@ -7,6 +7,7 @@
 #include"shoot.h"
 #include"Bullet.h"
 #include"Tank.h"
+
 using namespace std;
 using namespace sf;
 int main()
@@ -20,20 +21,33 @@ int main()
     int screenHeight = VideoMode::getDesktopMode().height;
     RenderWindow game(VideoMode(screenWidth, screenHeight), "Tanki");
     game.setFramerateLimit(144);
-
+    
    
     // creating objects
 
     Tank tank = *new Tank();
     vector<Bullet> bullets;
 
+
     bool isShoot = false;
     Clock clk;
+
+
     while (game.isOpen()) {
         Event ev; 
         while (game.pollEvent(ev)) {
             if (ev.type == Event::Closed) {
                 game.close();
+            }
+            if (ev.type == sf::Event::KeyPressed)
+            {
+                if (ev.key.code == sf::Keyboard::Space)
+                {
+                    Bullet bullet = *new Bullet();
+                    bullet.sprite.setPosition(tank.sprite.getPosition().x, tank.sprite.getPosition().y);
+                    bullet.sprite.setRotation(tank.sprite.getRotation());
+                    bullets.push_back(bullet);
+                }
             }
         }
 
@@ -43,13 +57,16 @@ int main()
 
 
         game.clear();
-        game.draw(tank.sprite);
         for (int i = 0; i < size(bullets); ++i) {
             if (bullets[i].getState() == false) {
                 bullets.erase(bullets.begin() + i);
+                --i;
             }
-            game.draw(bullets[i].sprite);
+            else {
+                game.draw(bullets[i].sprite);
+            }
         }
+        game.draw(tank.sprite);
         if (Keyboard::isKeyPressed(Keyboard::W)) {
             moveUp(tank.sprite, speedTank);
         }
@@ -62,25 +79,22 @@ int main()
         else if (Keyboard::isKeyPressed(Keyboard::A)) {
             moveLeft(tank.sprite, speedTank);
         }
-        if (Keyboard::isKeyPressed(Keyboard::Space) && !isShoot) {
-            Bullet bullet = *new Bullet();
-            bullet.sprite.setPosition(tank.sprite.getPosition().x, tank.sprite.getPosition().y);
-            bullet.sprite.setRotation(tank.sprite.getRotation());
-            bullets.push_back(bullet);
-        }
+        //if (Keyboard::isKeyPressed(Keyboard::Space) && (i % 10 == 0 || bullets.size() == 0)) {}
         for (int i = 0; i < bullets.size(); ++i) {
             if (bullets[i].getState()) {
                 shoot(bullets[i], speedBullet);
             }
             else {
                 bullets.erase(bullets.begin() + i);
+                --i;
             }
         }
-
+       
 
         game.display();
     }
 
     return 0;
 }
+
 

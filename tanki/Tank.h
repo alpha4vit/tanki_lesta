@@ -1,9 +1,9 @@
 #pragma once
 #include <iostream>
 #include<SFML/Graphics.hpp>
+#include"object.h"
 using namespace sf;
 using namespace std;
-#include"object.h"
 class Tank : public object
 {
 public:

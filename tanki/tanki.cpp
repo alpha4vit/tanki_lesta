@@ -8,6 +8,7 @@
 #include"Bullet.h"
 #include"Tank.h"
 #include"Background.h"
+#include"Enemy.h"
 #include<thread>
 #include<chrono>
 
@@ -35,7 +36,7 @@ int main()
     
     Tank tank = *new Tank();
     vector<Bullet> bullets;
-
+    Enemy enemy = *new Enemy(tank);
 
     bool isShoot = false;
     Clock clk;
@@ -77,6 +78,7 @@ int main()
         }
         thread shooting(drawingBullets, ref(game), ref(bullets), ref(speedBullet));
         game.draw(tank.sprite);
+        game.draw(enemy.sprite);
         if (Keyboard::isKeyPressed(Keyboard::W)) {
             moveUp(tank.sprite, speedTank);
         }

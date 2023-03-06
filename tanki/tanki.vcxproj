@@ -133,8 +133,10 @@
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="loadIMG.cpp" />
     <ClCompile Include="movement.cpp" />
+    <ClCompile Include="object.cpp" />
     <ClCompile Include="shoot.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="tanki.cpp" />
@@ -142,8 +144,10 @@
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="loadIMG.h" />
     <ClInclude Include="movement.h" />
+    <ClInclude Include="object.h" />
     <ClInclude Include="shoot.h" />
     <ClInclude Include="Tank.h" />
   </ItemGroup>

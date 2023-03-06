@@ -1,12 +1,15 @@
 #pragma once
-#include <iostream>
 #include<SFML/Graphics.hpp>
 using namespace sf;
 using namespace std;
-#include"object.h"
-class Tank : public object
+class object
 {
+protected:
+	Image img;
+	Texture texture;
+	bool isShoot;
 public:
-	Tank();
+	Sprite sprite;
+	
 };
 

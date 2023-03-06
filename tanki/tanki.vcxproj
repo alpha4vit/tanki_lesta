@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="loadIMG.cpp" />
     <ClCompile Include="movement.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="tanki.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="loadIMG.h" />
     <ClInclude Include="movement.h" />

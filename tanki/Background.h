@@ -1,25 +1,15 @@
 #pragma once
 
-
 #include<SFML/Graphics.hpp>
 using namespace sf;
 using namespace std;
-class Bullet
+class Background
 {
 private:
 	Image img;
 	Texture texture;
-	bool isShoot;
 public:
 	Sprite sprite;
-	Bullet();
-
-	void setState(bool isShoot) {
-		this->isShoot = isShoot;
-	}
-
-	bool getState() {
-		return this->isShoot;
-	}
+	Background();
 };
 

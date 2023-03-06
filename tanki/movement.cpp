@@ -33,3 +33,10 @@ void moveLeft(Sprite& tank, float& speedTank)
 		tank.move(-speedTank, 0);
 	}
 }
+
+void rotateEnemy(vector<Enemy>& enemies)
+{
+	for (int i = 0; i < enemies.size(); ++i) {
+		enemies[i].sprite.setRotation(enemies[i].sprite.getRotation() + 0.5);
+	}
+}

@@ -7,6 +7,6 @@ using namespace std;
 class Tank : public object
 {
 public:
-	Tank();
+	Tank(int& screenW, int& screenH);
 };
 

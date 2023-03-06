@@ -11,6 +11,7 @@
 #include"Enemy.h"
 #include<thread>
 #include<chrono>
+#include<ctime>
 
 using namespace std;
 using namespace sf;
@@ -20,12 +21,14 @@ void drawingBullets(RenderWindow& game, vector<Bullet>& bullets, float& speedBul
 int main()
 {
     setlocale(LC_ALL, "rus");
-
+    srand(time(NULL));
     // ------------------ creating game window and background
 
 
     int screenWidth = VideoMode::getDesktopMode().width;
     int screenHeight = VideoMode::getDesktopMode().height;
+    if (screenWidth > 1920) { screenWidth = 1920; }
+    if (screenHeight > 1080) { screenHeight = 1080; }
     RenderWindow game(VideoMode(screenWidth, screenHeight), "Tanki");
     Background bg = *new Background();
     //game.setFramerateLimit(144);
@@ -34,9 +37,12 @@ int main()
     // ------------   creating objects
 
     
-    Tank tank = *new Tank();
+    Tank tank = *new Tank(screenWidth, screenHeight);
     vector<Bullet> bullets;
-    Enemy enemy = *new Enemy(tank);
+    vector<Enemy> enemies;
+    for (int i = 0; i < 3; ++i) {
+        enemies.push_back(*new Enemy(tank, screenWidth, screenHeight, enemies));
+    }
 
     bool isShoot = false;
     Clock clk;
@@ -78,7 +84,10 @@ int main()
         }
         thread shooting(drawingBullets, ref(game), ref(bullets), ref(speedBullet));
         game.draw(tank.sprite);
-        game.draw(enemy.sprite);
+        for (Enemy enemy : enemies) {
+            game.draw(enemy.sprite);
+        }
+        rotateEnemy(enemies);
         if (Keyboard::isKeyPressed(Keyboard::W)) {
             moveUp(tank.sprite, speedTank);
         }

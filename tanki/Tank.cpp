@@ -1,6 +1,6 @@
 #include "Tank.h"
 
-Tank::Tank()
+Tank::Tank(int& screenW, int& screenH)
 {
 	this->img = Image();
 	if (!this->img.loadFromFile("image/tank.png")) {
@@ -11,6 +11,6 @@ Tank::Tank()
 	this->sprite = Sprite();
 	this->sprite.setTexture(this->texture);
 	this->sprite.setTextureRect(IntRect(129, 121, 146, 276));
-	this->sprite.setPosition(Vector2f(VideoMode::getDesktopMode().width / 2, VideoMode::getDesktopMode().height - 280));
+	this->sprite.setPosition(Vector2f(screenW/2, screenH-180));
 	this->sprite.setOrigin(Vector2f(70, 180));
 }
